@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.yoxnet</groupId>
+    <artifactId>DisasterWarning-platform</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>com.yoxnet.config</groupId>
+  <artifactId>DisasterWarning-common-config</artifactId>
+  <name>${project.artifactId}</name>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <resources>
+			<!-- Resource Filter -->
+			<resource>
+				<directory>src/main/resources</directory>
+				<targetPath>${project.build.directory}/classes</targetPath>
+				<includes>
+					<include>**/*</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<!-- 开发环境(本地环境) -->
+		<profile>
+			<id>dev</id>
+			<!-- <activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>  -->
+			<properties>
+				<maven.jdbc.host>192.168.1.163</maven.jdbc.host>
+				<maven.jdbc.port>3306</maven.jdbc.port>
+				<maven.jdbc.db>disaster_warning</maven.jdbc.db>
+				<maven.jdbc.username>basic</maven.jdbc.username>
+				<maven.jdbc.password>basic</maven.jdbc.password>
+				<maven.redis.host>192.168.1.161</maven.redis.host>
+				<maven.redis.port>6379</maven.redis.port>
+				<maven.redis.password></maven.redis.password>
+				<maven.mongo.hostport>192.168.88.222:50000</maven.mongo.hostport>
+				<maven.fastdfs.host>192.168.89.215:22122</maven.fastdfs.host>
+				<maven.dubbo.version>0.1</maven.dubbo.version>
+				<maven.dubbo.timeout>6000</maven.dubbo.timeout>
+				<!-- rabbitmq设置 -->
+				<maven.rabbitmq.host>192.168.88.3</maven.rabbitmq.host>
+				<maven.rabbitmq.username>cuish</maven.rabbitmq.username>
+				<maven.rabbitmq.password>basic</maven.rabbitmq.password>
+				<maven.rabbitmq.port>5672</maven.rabbitmq.port>
+				<maven.rabbitmq.vhost>/</maven.rabbitmq.vhost>
+				<!-- 跨越地址配置 -->
+				<corse.rest>http://127.0.0.1:8888,http://127.0.0.1:8887</corse.rest><!-- 跨越地址配置 -->
+			</properties>
+		</profile>
+		<!-- 测试环境(测试环境) -->
+		<profile>
+			<id>test</id>
+			<!-- <activation>
+				<activeByDefault>true</activeByDefault>
+			</activation> -->
+			<properties>
+				<maven.jdbc.host>127.0.0.1</maven.jdbc.host>
+				<maven.jdbc.port>3306</maven.jdbc.port>
+				<maven.jdbc.db>DisasterWarning</maven.jdbc.db>
+				<maven.jdbc.username>root</maven.jdbc.username>
+				<maven.jdbc.password>123456</maven.jdbc.password>
+				<maven.redis.host>127.0.0.1</maven.redis.host>
+				<maven.redis.port>6379</maven.redis.port>
+				<maven.redis.password></maven.redis.password>
+				<maven.mongo.hostport>127.0.0.1:50000</maven.mongo.hostport>
+				<maven.fastdfs.host>127.0.0.1:22122</maven.fastdfs.host>
+				<maven.dubbo.version>0.1</maven.dubbo.version>
+				<maven.dubbo.timeout>6000</maven.dubbo.timeout>
+				<!-- rabbitmq设置 -->
+				<maven.rabbitmq.host>192.168.88.3</maven.rabbitmq.host>
+				<maven.rabbitmq.username></maven.rabbitmq.username>
+				<maven.rabbitmq.password></maven.rabbitmq.password>
+				<maven.rabbitmq.port>5672</maven.rabbitmq.port>
+				<maven.rabbitmq.vhost>/</maven.rabbitmq.vhost>
+				<!-- 跨越地址配置 -->
+				<corse.rest>http://127.0.0.1:8888,http://127.0.0.1:8887</corse.rest><!-- 跨越地址配置 -->
+				<web-data-url>http://127.0.0.1:8887</web-data-url>
+			</properties>
+		</profile>
+		<!-- 生产环境(生产环境) -->
+		<!--<profile>-->
+			<!--<id>prod</id>-->
+		    <!--<activation>-->
+				<!--<activeByDefault>true</activeByDefault>-->
+			<!--</activation> -->
+			<!--<properties>-->
+				<!--<maven.jdbc.host>127.0.0.1</maven.jdbc.host>-->
+				<!--<maven.jdbc.port>3306</maven.jdbc.port>-->
+				<!--<maven.jdbc.db>disaster_warning</maven.jdbc.db>-->
+				<!--<maven.jdbc.username>root</maven.jdbc.username>-->
+				<!--<maven.jdbc.password>root</maven.jdbc.password>-->
+				<!--<maven.redis.host>192.168.1.161</maven.redis.host>-->
+				<!--<maven.redis.port>6379</maven.redis.port>-->
+				<!--<maven.redis.password></maven.redis.password>-->
+				<!--<maven.mongo.hostport>192.168.88.222:50000</maven.mongo.hostport>-->
+				<!--<maven.fastdfs.host>192.168.89.215:22122</maven.fastdfs.host>-->
+				<!--<maven.dubbo.version>0.1</maven.dubbo.version>-->
+				<!--<maven.dubbo.timeout>6000</maven.dubbo.timeout>-->
+				<!--&lt;!&ndash; rabbitmq设置 &ndash;&gt;-->
+				<!--<maven.rabbitmq.host>192.168.88.3</maven.rabbitmq.host>-->
+				<!--<maven.rabbitmq.username>cuish</maven.rabbitmq.username>-->
+				<!--<maven.rabbitmq.password>basic</maven.rabbitmq.password>-->
+				<!--<maven.rabbitmq.port>5672</maven.rabbitmq.port>-->
+				<!--<maven.rabbitmq.vhost>/</maven.rabbitmq.vhost>-->
+				<!---->
+				<!--<corse.rest>http://127.0.0.1:8080,http://127.0.0.1:80</corse.rest>-->
+			<!--</properties>-->
+		<!--</profile>-->
+		<profile>
+			<id>prod</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<maven.jdbc.host>101.200.234.82</maven.jdbc.host>
+				<maven.jdbc.port>3306</maven.jdbc.port>
+				<maven.jdbc.db>disaster_warning1</maven.jdbc.db>
+				<maven.jdbc.username>root1</maven.jdbc.username>
+				<maven.jdbc.password>123456</maven.jdbc.password>
+				<maven.redis.host>192.168.1.161</maven.redis.host>
+				<maven.redis.port>6379</maven.redis.port>
+				<maven.redis.password></maven.redis.password>
+				<maven.mongo.hostport>192.168.88.222:50000</maven.mongo.hostport>
+				<maven.fastdfs.host>192.168.89.215:22122</maven.fastdfs.host>
+				<maven.dubbo.version>0.1</maven.dubbo.version>
+				<maven.dubbo.timeout>6000</maven.dubbo.timeout>
+				<!-- rabbitmq设置 -->
+				<maven.rabbitmq.host>192.168.88.3</maven.rabbitmq.host>
+				<maven.rabbitmq.username>cuish</maven.rabbitmq.username>
+				<maven.rabbitmq.password>basic</maven.rabbitmq.password>
+				<maven.rabbitmq.port>5672</maven.rabbitmq.port>
+				<maven.rabbitmq.vhost>/</maven.rabbitmq.vhost>
+
+				<corse.rest>http://127.0.0.1:8080,http://127.0.0.1:80</corse.rest>
+			</properties>
+		</profile>
+	</profiles>
+</project>

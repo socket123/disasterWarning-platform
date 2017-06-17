@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+	<ISUPDATE>true</ISUPDATE>
+	<UPVERSION>2.0</UPVERSION>
+	<UPHTTPURL>http://101.200.234.82:8090/DisasterWarning-web-api/downloud/updata.apk</UPHTTPURL>
+	<ISMUST>true</ISMUST>
+	<UPITEMS>
+		最新版
+	</UPITEMS>
+</CONFIG>
+

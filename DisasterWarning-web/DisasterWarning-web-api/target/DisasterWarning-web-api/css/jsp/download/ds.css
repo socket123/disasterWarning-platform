@@ -1,0 +1,14 @@
+body{background: #fff;position: relative;}
+.page{width:100%;}
+/*ds.html*/
+.d-head{padding:15px 0px;margin:0px 15px;border-bottom: 1px solid #E5E5E5;text-align: center;font-size: 16px;}
+.d-pic{width: 60px;height: 60px;border-radius: 10px;margin:20px auto 13px;}
+.d-pic img,.ds-img img,.x-box img{width: 100%;height: 100%;}
+.d-a{display: block;width: 100px;height: 30px;line-height: 30px;color: #fff;background: #289D85;text-align: center;margin: auto;border-radius: 3px;}
+.d-ul{list-style: decimal;list-style-position: inside;padding:15px 15px 0px;}
+.d-ul li{padding: 1px 0px;line-height: 20px;}
+.ds-img{padding: 0px 20px;}
+.ds-one{width: 65%;height: 160px;margin: auto;padding: 10px 0px;}
+.ds-two{height: 260px;}
+.x-box{width: 100%;height: 100%;background: rgba(0,0,0,.5);position: absolute;top: 0;left: 0;z-index: 100;}
+.x-box .box-size{width:80%;height: 165px;margin:25px auto;}

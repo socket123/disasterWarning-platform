@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yoxnet.waterSystemInfo.dao.WaterSystemInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.yoxnet.waterSystemInfo.bean.WaterSystemInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+    <result column="water_sys_id" property="waterSysId" jdbcType="VARCHAR" />
+    <result column="water_sys_name" property="waterSysName" jdbcType="VARCHAR" />
+    <result column="flood_level" property="floodLevel" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      id, task_name, water_sys_id, water_sys_name, flood_level
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yoxnet.waterSystemInfo.bean.WaterSystemInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from data_water_system_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    id,task_name,water_sys_id,water_sys_name,flood_level
+    from data_water_system_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from data_water_system_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yoxnet.waterSystemInfo.bean.WaterSystemInfoExample" >
+    delete from data_water_system_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yoxnet.waterSystemInfo.bean.WaterSystemInfo" >
+    insert into data_water_system_info (id, task_name, water_sys_id, 
+      water_sys_name, flood_level)
+    values (#{id,jdbcType=INTEGER}, #{taskName,jdbcType=VARCHAR}, #{waterSysId,jdbcType=VARCHAR}, 
+      #{waterSysName,jdbcType=VARCHAR}, #{floodLevel,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yoxnet.waterSystemInfo.bean.WaterSystemInfo" >
+    insert into data_water_system_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="taskName != null" >
+        task_name,
+      </if>
+      <if test="waterSysId != null" >
+        water_sys_id,
+      </if>
+      <if test="waterSysName != null" >
+        water_sys_name,
+      </if>
+      <if test="floodLevel != null" >
+        flood_level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="waterSysId != null" >
+        #{waterSysId,jdbcType=VARCHAR},
+      </if>
+      <if test="waterSysName != null" >
+        #{waterSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="floodLevel != null" >
+        #{floodLevel,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yoxnet.waterSystemInfo.bean.WaterSystemInfoExample" resultType="java.lang.Integer" >
+    select count(*) from data_water_system_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update data_water_system_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskName != null" >
+        task_name = #{record.taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.waterSysId != null" >
+        water_sys_id = #{record.waterSysId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.waterSysName != null" >
+        water_sys_name = #{record.waterSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.floodLevel != null" >
+        flood_level = #{record.floodLevel,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update data_water_system_info
+    set id = #{record.id,jdbcType=INTEGER},
+      task_name = #{record.taskName,jdbcType=VARCHAR},
+      water_sys_id = #{record.waterSysId,jdbcType=VARCHAR},
+      water_sys_name = #{record.waterSysName,jdbcType=VARCHAR},
+      flood_level = #{record.floodLevel,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yoxnet.waterSystemInfo.bean.WaterSystemInfo" >
+    update data_water_system_info
+    <set >
+      <if test="taskName != null" >
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="waterSysId != null" >
+        water_sys_id = #{waterSysId,jdbcType=VARCHAR},
+      </if>
+      <if test="waterSysName != null" >
+        water_sys_name = #{waterSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="floodLevel != null" >
+        flood_level = #{floodLevel,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yoxnet.waterSystemInfo.bean.WaterSystemInfo" >
+    update data_water_system_info
+    set task_name = #{taskName,jdbcType=VARCHAR},
+      water_sys_id = #{waterSysId,jdbcType=VARCHAR},
+      water_sys_name = #{waterSysName,jdbcType=VARCHAR},
+      flood_level = #{floodLevel,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

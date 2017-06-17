@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.yoxnet.web</groupId>
+    <artifactId>DisasterWarning-web</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>com.yoxnet.api</groupId>
+  <artifactId>DisasterWarning-web-api</artifactId>
+  <packaging>war</packaging>
+  <name>DisasterWarning-web-api</name>
+  <dependencies>
+		<!-- <dependency>
+			<groupId>com.yoxnet.config</groupId>
+			<artifactId>DisasterWarning-common-config</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency> -->
+		<dependency>
+			<groupId>com.yoxnet.service.api</groupId>
+			<artifactId>DisasterWarning-service-api</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<!-- <dependency>
+			<groupId>com.yoxnet.common</groupId>
+			<artifactId>DisasterWarning-common</artifactId>
+			<version>${project.parent.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency> -->
+		<!-- 订单支付配置 -->
+		<!--cms配置 -->
+
+		<!--order配置 -->
+
+		<!--商品配置 -->
+
+		<!--工单配置 -->
+		<!--流程配置 -->
+		<!--消息配置 -->
+		<!-- fastdfs -->
+		<!--数据字典 -->
+		<!-- <dependency>
+			<groupId>com.zgg.dict.provider</groupId>
+			<artifactId>zgg-service-dict-provider</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency> -->
+		<!--mongo -->
+		<!--rabbitmq -->
+		<!-- spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<!-- json -->
+		<!-- 文件上传 -->
+		<!-- 日志 -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.logback-extensions</groupId>
+			<artifactId>logback-ext-spring</artifactId>
+		</dependency>
+		<!-- <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>  -->
+		<dependency>
+			<groupId>com.github.penggle</groupId>
+			<artifactId>kaptcha</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>DisasterWarning-web-api</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!-- Test Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+			<!-- War Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<path>/</path>
+					<port>${web.api}</port>
+					<uriEncoding>UTF-8</uriEncoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<maven.rest.endpoint>http://127.0.0.1:${web.api}</maven.rest.endpoint>
+				<maven.rest.debug>true</maven.rest.debug>
+			</properties>
+		</profile>
+	</profiles>
+</project>

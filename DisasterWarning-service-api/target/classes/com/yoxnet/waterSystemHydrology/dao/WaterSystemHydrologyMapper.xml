@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yoxnet.waterSystemHydrology.dao.WaterSystemHydrologyMapper" >
+  <resultMap id="BaseResultMap" type="com.yoxnet.waterSystemHydrology.bean.WaterSystemHydrology" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="water_sys_id" property="waterSysId" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="water_level" property="waterLevel" jdbcType="DECIMAL" />
+    <result column="flow" property="flow" jdbcType="DECIMAL" />
+    <result column="silt_concentration" property="siltConcentration" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      id, water_sys_id, time, water_level, flow, silt_concentration
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yoxnet.waterSystemHydrology.bean.WaterSystemHydrologyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from data_water_system_hydrology
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    id,water_sys_id,time,water_level,flow,silt_concentration
+    from data_water_system_hydrology
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from data_water_system_hydrology
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yoxnet.waterSystemHydrology.bean.WaterSystemHydrologyExample" >
+    delete from data_water_system_hydrology
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yoxnet.waterSystemHydrology.bean.WaterSystemHydrology" >
+    insert into data_water_system_hydrology (id, water_sys_id, time, 
+      water_level, flow, silt_concentration
+      )
+    values (#{id,jdbcType=VARCHAR}, #{waterSysId,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{waterLevel,jdbcType=DECIMAL}, #{flow,jdbcType=DECIMAL}, #{siltConcentration,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yoxnet.waterSystemHydrology.bean.WaterSystemHydrology" >
+    insert into data_water_system_hydrology
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="waterSysId != null" >
+        water_sys_id,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="waterLevel != null" >
+        water_level,
+      </if>
+      <if test="flow != null" >
+        flow,
+      </if>
+      <if test="siltConcentration != null" >
+        silt_concentration,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="waterSysId != null" >
+        #{waterSysId,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="waterLevel != null" >
+        #{waterLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="flow != null" >
+        #{flow,jdbcType=DECIMAL},
+      </if>
+      <if test="siltConcentration != null" >
+        #{siltConcentration,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yoxnet.waterSystemHydrology.bean.WaterSystemHydrologyExample" resultType="java.lang.Integer" >
+    select count(*) from data_water_system_hydrology
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update data_water_system_hydrology
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.waterSysId != null" >
+        water_sys_id = #{record.waterSysId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.waterLevel != null" >
+        water_level = #{record.waterLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="record.flow != null" >
+        flow = #{record.flow,jdbcType=DECIMAL},
+      </if>
+      <if test="record.siltConcentration != null" >
+        silt_concentration = #{record.siltConcentration,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update data_water_system_hydrology
+    set id = #{record.id,jdbcType=VARCHAR},
+      water_sys_id = #{record.waterSysId,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      water_level = #{record.waterLevel,jdbcType=DECIMAL},
+      flow = #{record.flow,jdbcType=DECIMAL},
+      silt_concentration = #{record.siltConcentration,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yoxnet.waterSystemHydrology.bean.WaterSystemHydrology" >
+    update data_water_system_hydrology
+    <set >
+      <if test="waterSysId != null" >
+        water_sys_id = #{waterSysId,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="waterLevel != null" >
+        water_level = #{waterLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="flow != null" >
+        flow = #{flow,jdbcType=DECIMAL},
+      </if>
+      <if test="siltConcentration != null" >
+        silt_concentration = #{siltConcentration,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yoxnet.waterSystemHydrology.bean.WaterSystemHydrology" >
+    update data_water_system_hydrology
+    set water_sys_id = #{waterSysId,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      water_level = #{waterLevel,jdbcType=DECIMAL},
+      flow = #{flow,jdbcType=DECIMAL},
+      silt_concentration = #{siltConcentration,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,55 @@
+@charset "utf-8";
+/* CSS Document */
+
+.c-icon {
+	font-family: cicons!important;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased
+}
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: transparent;  
+    -webkit-appearance: none;  
+}
+
+body {
+	font-size-adjust: none;background: #f2f2f2;
+	-webkit-text-size-adjust: none;
+	font: 14px Microsoft YaHei,Arial, Helvetica, sans-serif;	color: #333;
+}
+input[type=search]:focus {
+	background-color: transparent
+}
+input[type=search]::-webkit-search-cancel-button {
+display:none
+}
+input, button {
+	border: 0;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	background-color: transparent;
+	-webkit-appearance: none;
+	-webkit-box-sizing: border-box
+}
+a{text-decoration: none;}
+/*去掉chrome黄色边框*/
+:focus {
+    outline: 0;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.clear{clear: both;}

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yoxnet.pointDisaster.dao.PointDisasterMapper" >
+  <resultMap id="BaseResultMap" type="com.yoxnet.pointDisaster.bean.PointDisaster" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+    <result column="kilometer_pile_id" property="kilometerPileId" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="disaster_type" property="disasterType" jdbcType="VARCHAR" />
+    <result column="disaster_level" property="disasterLevel" jdbcType="VARCHAR" />
+    <result column="details" property="details" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      id, task_name, kilometer_pile_id, start_time, end_time, disaster_type, disaster_level,
+      details
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yoxnet.pointDisaster.bean.PointDisasterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from data_point_disaster
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    id,task_name,kilometer_pile_id,start_time,end_time,disaster_type,disaster_level,details
+    from data_point_disaster
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from data_point_disaster
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yoxnet.pointDisaster.bean.PointDisasterExample" >
+    delete from data_point_disaster
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yoxnet.pointDisaster.bean.PointDisaster" >
+    insert into data_point_disaster (id, task_name, kilometer_pile_id,
+    start_time, end_time, disaster_type,
+    disaster_level, details)
+    values (#{id,jdbcType=VARCHAR}, #{taskName,jdbcType=VARCHAR}, #{kilometerPileId,jdbcType=VARCHAR},
+    #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{disasterType,jdbcType=VARCHAR},
+    #{disasterLevel,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yoxnet.pointDisaster.bean.PointDisaster" >
+    insert into data_point_disaster
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="taskName != null" >
+        task_name,
+      </if>
+      <if test="kilometerPileId != null" >
+        kilometer_pile_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="disasterType != null" >
+        disaster_type,
+      </if>
+      <if test="disasterLevel != null" >
+        disaster_level,
+      </if>
+      <if test="details != null" >
+        details,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="kilometerPileId != null" >
+        #{kilometerPileId,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="disasterType != null" >
+        #{disasterType,jdbcType=VARCHAR},
+      </if>
+      <if test="disasterLevel != null" >
+        #{disasterLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        #{details,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yoxnet.pointDisaster.bean.PointDisasterExample" resultType="java.lang.Integer" >
+    select count(*) from data_point_disaster
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update data_point_disaster
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskName != null" >
+        task_name = #{record.taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kilometerPileId != null" >
+        kilometer_pile_id = #{record.kilometerPileId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.disasterType != null" >
+        disaster_type = #{record.disasterType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disasterLevel != null" >
+        disaster_level = #{record.disasterLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.details != null" >
+        details = #{record.details,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update data_point_disaster
+    set id = #{record.id,jdbcType=VARCHAR},
+    task_name = #{record.taskName,jdbcType=VARCHAR},
+    kilometer_pile_id = #{record.kilometerPileId,jdbcType=VARCHAR},
+    start_time = #{record.startTime,jdbcType=TIMESTAMP},
+    end_time = #{record.endTime,jdbcType=TIMESTAMP},
+    disaster_type = #{record.disasterType,jdbcType=VARCHAR},
+    disaster_level = #{record.disasterLevel,jdbcType=VARCHAR},
+    details = #{record.details,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yoxnet.pointDisaster.bean.PointDisaster" >
+    update data_point_disaster
+    <set >
+      <if test="taskName != null" >
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="kilometerPileId != null" >
+        kilometer_pile_id = #{kilometerPileId,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="disasterType != null" >
+        disaster_type = #{disasterType,jdbcType=VARCHAR},
+      </if>
+      <if test="disasterLevel != null" >
+        disaster_level = #{disasterLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yoxnet.pointDisaster.bean.PointDisaster" >
+    update data_point_disaster
+    set task_name = #{taskName,jdbcType=VARCHAR},
+      kilometer_pile_id = #{kilometerPileId,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      disaster_type = #{disasterType,jdbcType=VARCHAR},
+      disaster_level = #{disasterLevel,jdbcType=VARCHAR},
+      details = #{details,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

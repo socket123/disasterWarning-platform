@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yoxnet.hedgeMeasures.dao.DataHedgeMeasuresMapper" >
+  <resultMap id="BaseResultMap" type="com.yoxnet.hedgeMeasures.bean.DataHedgeMeasures" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="disaster_type" property="disasterType" jdbcType="VARCHAR" />
+    <result column="disaster_level" property="disasterLevel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      id, disaster_type, disaster_level
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yoxnet.hedgeMeasures.bean.DataHedgeMeasuresExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from data_hedge_measures
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    id,disaster_type,disaster_level
+    from data_hedge_measures
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from data_hedge_measures
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yoxnet.hedgeMeasures.bean.DataHedgeMeasuresExample" >
+    delete from data_hedge_measures
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yoxnet.hedgeMeasures.bean.DataHedgeMeasures" >
+    insert into data_hedge_measures (id, disaster_type, disaster_level
+      )
+    values (#{id,jdbcType=VARCHAR}, #{disasterType,jdbcType=VARCHAR}, #{disasterLevel,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yoxnet.hedgeMeasures.bean.DataHedgeMeasures" >
+    insert into data_hedge_measures
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="disasterType != null" >
+        disaster_type,
+      </if>
+      <if test="disasterLevel != null" >
+        disaster_level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="disasterType != null" >
+        #{disasterType,jdbcType=VARCHAR},
+      </if>
+      <if test="disasterLevel != null" >
+        #{disasterLevel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yoxnet.hedgeMeasures.bean.DataHedgeMeasuresExample" resultType="java.lang.Integer" >
+    select count(*) from data_hedge_measures
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update data_hedge_measures
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disasterType != null" >
+        disaster_type = #{record.disasterType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disasterLevel != null" >
+        disaster_level = #{record.disasterLevel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update data_hedge_measures
+    set id = #{record.id,jdbcType=VARCHAR},
+      disaster_type = #{record.disasterType,jdbcType=VARCHAR},
+      disaster_level = #{record.disasterLevel,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yoxnet.hedgeMeasures.bean.DataHedgeMeasures" >
+    update data_hedge_measures
+    <set >
+      <if test="disasterType != null" >
+        disaster_type = #{disasterType,jdbcType=VARCHAR},
+      </if>
+      <if test="disasterLevel != null" >
+        disaster_level = #{disasterLevel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yoxnet.hedgeMeasures.bean.DataHedgeMeasures" >
+    update data_hedge_measures
+    set disaster_type = #{disasterType,jdbcType=VARCHAR},
+      disaster_level = #{disasterLevel,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
